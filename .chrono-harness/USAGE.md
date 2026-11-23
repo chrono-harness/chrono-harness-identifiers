@@ -1,5 +1,7 @@
 # chrono-harness-identifiers 使用说明
 
+组件的用途、开发仓库和示例见 [Chrono Harness 用户与开发者入口](https://github.com/chrono-harness/chrono-harness-main)。
+
 标识符校验的现役实现和证明已迁入 runner。这里保留迁移中的证明调用方所用的历史版本。
 
 开发分支为 `dev`。日常 PR 合入开发分支，正式版从 `main` 发布。
