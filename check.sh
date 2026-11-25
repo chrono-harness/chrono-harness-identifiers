@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")"
-scratch=$(mktemp -d)
+if [[ -f .git && ! -L target ]] && git_dir=$(git rev-parse --git-dir 2>/dev/null) && [[ -f "$git_dir/commondir" ]]; then
+  mkdir -p target
+  scratch=$(mktemp -d "$(pwd -P)/target/check.XXXXXXXX")
+else
+  scratch=$(mktemp -d)
+fi
 trap 'rm -rf -- "$scratch"' EXIT
 export CARGO_TARGET_DIR="$scratch/cargo"
 cargo fmt --check --manifest-path crates/identifiers/Cargo.toml
