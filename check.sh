@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")"
-if [[ -f .git && ! -L target ]] && git_dir=$(git rev-parse --git-dir 2>/dev/null) && [[ -f "$git_dir/commondir" ]]; then
+if [[ ${1:-} != --managed-scratch && ${GITHUB_ACTIONS:-} != true ]] && [[ -d .git && ! -L .git && ! -L target && ! -L target/native-checks ]]; then
+  exec chrono-host-bootstrap native-scratch run bash ./check.sh --managed-scratch
+fi
+if [[ ${1:-} == --managed-scratch ]]; then
+  scratch=${CHRONO_NATIVE_SCRATCH:?missing managed scratch directory}
+elif [[ -f .git && ! -L target ]] && git_dir=$(git rev-parse --git-dir 2>/dev/null) && [[ -f "$git_dir/commondir" ]]; then
   mkdir -p target
   scratch=$(mktemp -d "$(pwd -P)/target/check.XXXXXXXX")
+  trap 'rm -rf -- "$scratch"' EXIT
 else
   scratch=$(mktemp -d)
+  trap 'rm -rf -- "$scratch"' EXIT
 fi
-trap 'rm -rf -- "$scratch"' EXIT
 export CARGO_TARGET_DIR="$scratch/cargo"
 cargo fmt --check --manifest-path crates/identifiers/Cargo.toml
 cargo fmt --check --manifest-path crates/identifiers-tests/Cargo.toml
