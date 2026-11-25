@@ -11,7 +11,7 @@ elif [[ -f .git && ! -L target ]] && git_dir=$(git rev-parse --git-dir 2>/dev/nu
   scratch=$(mktemp -d "$(pwd -P)/target/check.XXXXXXXX")
   trap 'rm -rf -- "$scratch"' EXIT
 else
-  scratch=$(mktemp -d)
+  scratch=$(mktemp -d "${TMPDIR:-/tmp}/identifiers-check.XXXXXXXX")
   trap 'rm -rf -- "$scratch"' EXIT
 fi
 export CARGO_TARGET_DIR="$scratch/cargo"
