@@ -1,12 +1,12 @@
 # chrono-harness/chrono-harness-identifiers 工作说明
 
-提交 Issue、命名分支和交付 PR 时，遵循[协作规范](https://github.com/chrono-harness/chrono-harness-main/blob/dev/docs/contributing.md)。
-
 组件的用途、开发仓库和示例见 [Chrono Harness 用户与开发者入口](https://github.com/chrono-harness/chrono-harness-main)。
 
 标识符校验的现役实现和证明已迁入 runner。这里保留迁移中的证明调用方所用的历史版本。
 
 ## 本仓开发
+
+本仓安装和 PR 查询命令见 [USAGE.md](.chrono-harness/USAGE.md)。
 
 现役实现、原生测试和 Verus 证明在 [runner](https://github.com/chrono-harness/chrono-harness-runner) 维护。本仓保留的源码和测试位于 `crates/identifiers` 和 `crates/identifiers-tests`。在本仓运行 `mise exec -- ./check.sh` 构建、测试并验证当前检出。
 
@@ -22,8 +22,6 @@ mise run harness-setup
 本仓选装的工具为 `cache`、`ci`、`distribution`、`harness`、`host-bootstrap`、`host-release`、`inputs`、`instructions`、`judge-ci`、`judge-cost`、`judge-filemap`、`judge-mixed`、`judge-projects`、`registration`、`judge-routes`、`judge-workflow`、`pr`、`test-git`、`worktree`、`verus`。
 
 本仓安装选择保存在 `.chrono-harness/template-answers.yml`，版本和平台校验值保存在 `.config/mise/conf.d/chrono-harness.toml`。
-
-开始和结束任务时，用 `mise exec -- chrono-pr pr-reminders` 查看本工作树中自己打开的 PR。用 `mise exec -- chrono-pr pr-status --pr NUMBER --head-sha SHA` 核对指定候选。
 
 ## 基础指令
 
