@@ -8,8 +8,4 @@
 
 源码和测试取自 [ChronoAIProject/chrono-harness 的固定提交](https://github.com/ChronoAIProject/chrono-harness/tree/7e99515590402f83c6b0931d8e37242dc32faf0d/crates/identifiers)。
 
-普通长期主检出使用本仓已选装的 host-bootstrap 在 `target/native-checks/` 内建立一次检查的私有目录。成功后立即释放，失败或强制中断的材料留给调试与转存。开发者可在窗口内复制到独立存储。在本机用户 crontab 登记以下任务，每小时回收超过 24 小时且使用方已退出的检查目录。把两处绝对路径替换为本机检出和 mise 安装位置。
-
-```cron
-0 * * * * cd '/absolute/path/to/chrono-harness-identifiers' && '/absolute/path/to/mise' run harness-maintain-checks
-```
+普通长期主检出使用本仓已选装的 host-bootstrap 在 `target/native-checks/` 内建立一次检查的私有目录。成功后立即释放，失败或强制中断的材料留给调试与转存。开发者可在窗口内复制到独立存储。运行 `mise run harness-maintain-checks` 可回收已满 24 小时且使用方已退出的目录。
