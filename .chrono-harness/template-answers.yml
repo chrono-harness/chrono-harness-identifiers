@@ -35,3 +35,7 @@ required_check: check
 strict_host_adapters: {}
 tool_install_channels: pinned
 tool_versions: {}
+dependabot_auto_merge: true
+dependabot_updates:
+- {"package-ecosystem": "github-actions", "directory": "/", "schedule": {"interval": "daily"}, "groups": {"github-actions": {"patterns": ["*"]}}}
+- {"package-ecosystem": "cargo", "schedule": {"interval": "daily"}, "groups": {"cargo": {"patterns": ["*"]}}, "directories": ["/crates/identifiers", "/crates/identifiers-tests"]}
